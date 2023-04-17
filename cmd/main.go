@@ -139,7 +139,7 @@ func HandleServe(resp http.ResponseWriter, req *http.Request) {
 		http.Error(resp, "Error with generating response: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
-	err = redis.Set(ctx, cacheKey, append(chatHistory, assistantMessage))
+	err = redis.Set(ctx, cacheKey, append(chatHistory, userMessage, assistantMessage))
 	if err != nil {
 		http.Error(resp, "Error with saving histories: "+err.Error(), http.StatusInternalServerError)
 		return
